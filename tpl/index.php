@@ -1,5 +1,5 @@
 <?
 include "header.php";
-//include $tpl.".php";
-//include "footer.php";
+include $tpl.".php";
+include "footer.php";
 ?>

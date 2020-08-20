@@ -1,9 +1,11 @@
 <?php
+
 class main extends ACore {
 	
-	public function get_content() {
+
+	public function getTask() {
 		
-		$result = $this->m->get_main_content();
+		$result = $this->m->getTask();
 		return $result;
 	
 	}

@@ -12,20 +12,26 @@ abstract class ACore {
 		return TRUE;
 	}
 	
-	//protected function get_footer() {
-	//	$row = $this->m->menu_array();
-	//	return $row;
-	//}
+	protected function get_footer() {
+		return TRUE;
+	}
+
+	protected function TaskList() {
+		$row = $this->m->getTask();
+		return $row;		
+	}
 	
 	
+
 	public function get_body($tpl) {
 		$this->get_header();
-		//$footer = $this->get_footer();
+		$content = $this->TaskList();
+		$footer = $this->get_footer();
 		//$tpl - template
 		include "tpl/index.php";
 	}
 	
-	abstract function get_content();
+	abstract function getTask();
 	
 }
 

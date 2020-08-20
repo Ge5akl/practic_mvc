@@ -1,9 +1,10 @@
+<?php session_start() ?> 
 <!DOCTYPE html>
 <html>
     <head>
         <title>Название нашего сайта</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="style/styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script type="text/javascript">
@@ -49,3 +50,26 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
+  </div>
+  <?php
+                //Проверяем авторизован ли пользователь
+                if(!isset($_SESSION['login']) && !isset($_SESSION['password'])){
+                    // если нет, то выводим блок с ссылками на страницу регистрации и авторизации
+            ?>
+                        <a class="nav-link" href="tpl/form_register.php">Регистрация</a>
+                        <a class="nav-link" href="tpl/form_auth.php">Авторизация</a>
+            <?php
+                }else{
+                    //Если пользователь авторизован, то выводим ссылку Выход
+            ?> 
+                    <div id="link_logout">
+                        <a href="logout.php">Выход</a>
+                    </div>
+            <?php
+                }
+            ?>
+            </div>
+             <div class="clear"></div>
+        </div>
+        </div>
+        </nav>  

@@ -1,19 +1,8 @@
-<div id='bottom'>
-		<div class="toplinks" style="padding-left:127px;">
-					<a href="?option=main">Главная</a></div>
-				<div class="sap2">::</div>
-		<?php $i = 1;?>
-		<?php foreach($menu_top as $item) :?>
-			<div class='toplinks'><a href='?option=menu&id_menu=<?php echo $item['id_menu']?>'><?php echo $item['name_menu']?></a></div>
-				
-				<?php if($i != count($menu_top)) :?>
-					<div class='sap2'>::</div>
-				<?php endif;?>
-				<?php $i++;?>
-		<?php endforeach; ?>
-		</div>
-		            <div class="copy"><span class="style1"> Copyright 2010 Название сайта </span>
-
-		</div>
-	</div>
-</center></body></html>
+<div id="footer">
+            <h2>По3двал сайта</h2>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+</html>
