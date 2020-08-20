@@ -1,8 +1,3 @@
-<?php
-    //Запускаем сессию
-    session_start();
-?>
- 
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,6 +9,9 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 "use strict";
+          
+
+         
                 //================ Проверка длины пароля ==================
                 var password = $('input[name=password]');
                  
@@ -51,25 +49,3 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-            <?php
-                //Проверяем авторизован ли пользователь
-                if(!isset($_SESSION['login']) && !isset($_SESSION['password'])){
-                    // если нет, то выводим блок с ссылками на страницу регистрации и авторизации
-            ?>
-                        <a class="nav-link" href="/form_register.php">Регистрация</a>
-                        <a class="nav-link" href="/form_auth.php">Авторизация</a>
-            <?php
-                }else{
-                    //Если пользователь авторизован, то выводим ссылку Выход
-            ?> 
-                    <div id="link_logout">
-                        <a href="/logout.php">Выход</a>
-                    </div>
-            <?php
-                }
-            ?>
-            </div>
-             <div class="clear"></div>
-        </div>
-        </div>
-        </nav>  

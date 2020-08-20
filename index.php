@@ -1,24 +1,37 @@
 <?php
-    //Подключение шапки
-    require_once("header.php");
-    require_once("dbconnect.php");
-?>
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
-<div id="content">
-<form action="createmsg.php" method="post">
- <p>Введите дело <input type="text" name="name" required /></p>
- <p><input type="submit" /></p>
-</form>
-<form action="endwork.php" method="post">
-<p><input type="submit" name="edit_work" value="Закончить дело" /></p>
-<p><input type="submit" name="delete_work" value="Удалить дело" /></p>
-        <?php
-    require_once("showmsg.php");
-?>
-</form>
-</div>
-<?php
-    //Подключение подвала
-    require_once("footer.php");
+
+use function PHPSTORM_META\elementType;
+
+require_once("config.php");
+
+function my_autoloader($c) {
+	if(file_exists('controller/' . $c . '.php')){
+		include 'controller/' . $c . '.php';
+	}
+	elseif(file_exists('model/' . $c . '.php')){
+		include 'model/' . $c . '.php';
+	}
+}
+
+spl_autoload_register('my_autoloader');
+
+
+if($_GET['option']) {
+	$class = trim(strip_tags($_GET['option']));
+}
+else {
+	$class = 'main';	
+}
+
+
+	if(class_exists($class)) {
+		
+		$obj = new $class;
+		$obj->get_body($class);
+	}
+	else {
+		exit("<p>Нет данные для входа</p>");
+	}
+
 
 ?>
