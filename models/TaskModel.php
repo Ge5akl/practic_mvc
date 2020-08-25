@@ -25,19 +25,19 @@ class TaskModel extends Model {
 			$val3 = $today;
 			//var_dump($val3);
 			$result = mysqli_query($this->db, "INSERT INTO `disc` (user_id, description, created_at) VALUES ('".$val1."', '".$val2."', '".$val3."') ");
-
+			header("Refresh: 0");
 			//$result_query_insert = $mysqli->query("INSERT INTO `disc` (user_id, description, created_at) VALUES ('".$val1."', '".$val2."', '".$val3."') ");
 		}
 
 		public function deleteTask($idWork){
 		$val4 = $idWork;	
 			$result = mysqli_query($this->db, "DELETE FROM `disc` WHERE `id` = '".$val4."'");
-			var_dump($result);	
+			header("Refresh: 0");
 		}
 
 			public function UdpdateTask($idWork){
 		$val4 = $idWork;	
 			$result = mysqli_query($this->db, "UPDATE `disc` set `status` = 'notActive' WHERE `id` = '".$val4."'");
-			var_dump($result);	
+			header("Refresh: 0");
 		}
 }

@@ -23,7 +23,10 @@ class TaskController extends Controller {
 	}
 
 	public function index() {
-		
+		if(!isset($_SESSION["login"])){
+			header("Location: /");
+		}
+		if(isset($_SESSION["login"])){
 		$tasks = $this->model->getTask();
 		$this->pageData['tasks'] = $tasks;
 
@@ -41,17 +44,16 @@ class TaskController extends Controller {
 		}
 		if(isset($_POST['delete_work'] )){
 			$idWork = $_POST['work'];
-			var_dump($idWork);
 			$this->model->deleteTask($idWork);
 		} 
 
 		if(isset($_POST['edit_work'] )){
 			$idWork = $_POST['work'];
-			var_dump($idWork);
 			$this->model->udpdateTask($idWork);
 		} 		
 
 		$this->view->render($this->pageTpl, $this->pageData);
+	}
 	}
 
 	public function logout() {
