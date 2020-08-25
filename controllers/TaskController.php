@@ -18,42 +18,56 @@ class TaskController extends Controller {
 	}
 
     protected function getTaskContent() {
-		$row = $this->model->getTask();
+    	$UserLogin = $_SESSION['login'];
+		$row = $this->model->getTask($UserLogin);
 		return $row;		
 	}
+
+	public function delTask(){
+			$idWork = $_POST['work'];
+			settype($work, 'string');
+			$this->model->deleteTask($idWork);
+	}
+
+	public function addTask(){
+			$discript = (string)$_POST['name'];
+			$today = date("m.d.y");   
+			$UsrId = $_SESSION['UserId'];
+			$this->model->addTask($discript, $today, $UsrId);
+				
+	}
+
+	public function editTask(){
+			$idWork = $_POST['work'];
+			settype($idWork, 'string');
+			$this->model->udpdateTask($idWork);	
+	}	
+
 
 	public function index() {
 		if(!isset($_SESSION["login"])){
 			header("Location: /");
 		}
-		if(isset($_SESSION["login"])){
-		$tasks = $this->model->getTask();
-		$this->pageData['tasks'] = $tasks;
-
 		if (isset($_POST["addTask"])) {
 			if(!empty($_POST) && !empty($_POST['name'])) {
-			$discript = $_POST['name'];
-			$today = date("m.d.y");   
-			$UsrId = $_SESSION['UserId'];
-			$this->model->addTask($discript, $today, $UsrId);
-				
-		} else {
+				$this->addTask();
+			}  else {
 			$this->pageData['TaskMsg'] = "Вы заполнили не все поля";
 			return false;
 		}
 		}
 		if(isset($_POST['delete_work'] )){
-			$idWork = $_POST['work'];
-			$this->model->deleteTask($idWork);
-		} 
+				$this->delTask();
+		 }
+		 if(isset($_POST['edit_work'] )){
+		 		$this->editTask();
+		 }
 
-		if(isset($_POST['edit_work'] )){
-			$idWork = $_POST['work'];
-			$this->model->udpdateTask($idWork);
-		} 		
+		$tasks = $this->model->getTask();
+		$this->pageData['tasks'] = $tasks;
 
 		$this->view->render($this->pageTpl, $this->pageData);
-	}
+	
 	}
 
 	public function logout() {

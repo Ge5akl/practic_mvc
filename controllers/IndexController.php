@@ -10,6 +10,13 @@ class indexController extends Controller {
 		$this->view = new View();
 	}
 
+	public function auth(){
+		$login = $_POST['login'];
+		settype($login, 'string');
+		$password = md5($_POST['password']);
+		settype($login, 'string');
+		$this->model->checkUser($login, $password);
+	}
 
 	public function index() {
 		$this->pageData['title'] = "Вход в личный кабинет";
@@ -18,17 +25,23 @@ class indexController extends Controller {
 				$this->pageData['error'] = "Неправильный логин или пароль";
 			}
 		}
+		if(isset($_POST['btn_submit_auth'])){
+			$this->auth();
+
+		}
+		
 
 		$this->view->render($this->pageTpl, $this->pageData);
 
-
 	}
-
 
 	public function login() {
-		if(!$this->model->checkUser()) {
+		if(!$this->model->checkUser($login, $pasword)) {
 			return false;
-		}
+		} 
 	}
+
+
+
 }
 

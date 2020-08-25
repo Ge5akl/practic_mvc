@@ -3,12 +3,11 @@
 class IndexModel extends Model {
 
 
-	public function checkUser() {
-		$login = $_POST['login'];
-		$password = md5($_POST['password']);
-		
+	public function checkUser($login, $password) {
+		$login = mysqli_real_escape_string($this->db, $login);
+		$password = mysqli_real_escape_string($this->db, $password);
 		$result = mysqli_query($this->db,"SELECT * FROM `users` WHERE login = '".$login."' AND password = '".$password."'");
-		for($i = 0; $i < mysqli_num_rows($result);$i++) {
+		for($i = 0; $i < mysqli_fetch_row($result);$i++) {
 			$res[] = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		}
 		//var_dump($res);
