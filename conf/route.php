@@ -18,8 +18,7 @@ class Routing {
             $controllerName = ucfirst($route[1]. "Controller");
             $modelName = ucfirst($route[1]. "Model");
         }
-
-
+        
         require_once CONTROLLER_PATH . $controllerName . ".php"; //IndexController.php
         require_once MODEL_PATH . $modelName . ".php"; //IndexModel.php
 
@@ -29,11 +28,6 @@ class Routing {
 
         $controller = new $controllerName();
         $controller->$action(); // $controller->index();
-
-    }
-
-    public function errorPage() {
-
     }
 
 

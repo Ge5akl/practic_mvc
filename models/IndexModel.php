@@ -13,15 +13,11 @@ class IndexModel extends Model {
 		//var_dump($res);
 		//var_dump($_SESSION['login']);
 		if(!empty($res)) {
-		$_SESSION['User'] = $res;
-		$_SESSION['login'] = $login;
-		header("Location: /task");
+		return($res);
 	}
 	 if(empty($res)){
 		$resultReg = mysqli_query($this->db,"INSERT INTO `users` (login, password) VALUES ('".$login."','".$password."')");	
-			$_SESSION['User'] = $row;
-			$_SESSION['login'] = $login;
-		header("Location: /task");
+		return($resultReg);
 		}	
 }
 }

@@ -11,7 +11,6 @@ class TaskController extends Controller {
         $this->model = new TaskModel();
         $this->view = new View();
     }
-
       protected function getUserId() {
 		$row = $this->model->getUserId();
 		return $row;		
@@ -67,8 +66,7 @@ class TaskController extends Controller {
 		$this->pageData['tasks'] = $tasks;
 
 		$this->view->render($this->pageTpl, $this->pageData);
-	
-	}
+		}
 
 	public function logout() {
 		session_destroy();

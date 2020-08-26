@@ -16,6 +16,8 @@ class indexController extends Controller {
 		$password = md5($_POST['password']);
 		settype($login, 'string');
 		$this->model->checkUser($login, $password);
+		$_SESSION['login'] = $login;
+		header("Location: /task");
 	}
 
 	public function index() {
