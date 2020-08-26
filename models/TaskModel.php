@@ -19,27 +19,23 @@ class TaskModel extends Model {
 		return $row;
 }		
 		public function addTask($discript, $today,$UsrId){
-			$val1 = mysqli_real_escape_string($this->db, $UsrId);
-			$val2 = mysqli_real_escape_string($this->db, $discript);
-			$val3 = mysqli_real_escape_string($this->db, $today);
-			//var_dump($val3);
 			$discript = mysqli_real_escape_string($this->db, $discript);
 			$today = mysqli_real_escape_string($this->db, $today);
 			$UsrId = mysqli_real_escape_string($this->db, $UsrId);
-			$result = mysqli_query($this->db, "INSERT INTO `disc` (user_id, description, created_at) VALUES ('".$val1."', '".$val2."', '".$val3."') ");
+			$result = mysqli_query($this->db, "INSERT INTO `disc` (user_id, description, created_at) VALUES ('".$UsrId."', '".$discript."', '".$today."') ");
 			header("Refresh: 0");
 			//$result_query_insert = $mysqli->query("INSERT INTO `disc` (user_id, description, created_at) VALUES ('".$val1."', '".$val2."', '".$val3."') ");
 		}
 
 		public function deleteTask($idWork){
-		$val4 = mysqli_real_escape_string($this->db, $idWork);
-			$result = mysqli_query($this->db, "DELETE FROM `disc` WHERE `id` = '".$val4."'");
-			header("Refresh: 0");
+		$idWork = mysqli_real_escape_string($this->db, $idWork);
+			$result = mysqli_query($this->db, "DELETE FROM `disc` WHERE `id` = '".$idWork."'");
+			return($idWork);
 		}
 
 			public function UdpdateTask($idWork){
-		$val4 = mysqli_real_escape_string($this->db, $idWork);
-			$result = mysqli_query($this->db, "UPDATE `disc` set `status` = 'notActive' WHERE `id` = '".$val4."'");
-			header("Refresh: 0");
+		$idWork = mysqli_real_escape_string($this->db, $idWork);
+			$result = mysqli_query($this->db, "UPDATE `disc` set `status` = 'notActive' WHERE `id` = '".$idWork."'");
+			return($idWork);
 		}
 }

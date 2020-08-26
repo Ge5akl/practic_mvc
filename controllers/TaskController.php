@@ -57,9 +57,11 @@ class TaskController extends Controller {
 		}
 		if(isset($_POST['delete_work'] )){
 				$this->delTask();
+				header("Refresh: 0");
 		 }
 		 if(isset($_POST['edit_work'] )){
 		 		$this->editTask();
+		 		header("Refresh: 0");
 		 }
 
 		$tasks = $this->model->getTask();
