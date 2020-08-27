@@ -11,45 +11,54 @@ class TaskController extends Controller {
         $this->model = new TaskModel();
         $this->view = new View();
     }
+// получение индетефикатора пользователя
       protected function getUserId() {
 		$row = $this->model->getUserId();
 		return $row;		
 	}
-
+// функция для получения контента заданий
     protected function getTaskContent() {
     	$UserLogin = $_SESSION['login'];
 		$row = $this->model->getTask($UserLogin);
 		return $row;		
 	}
-
+// функция удаления задания
 	public function delTask(){
 			$idWork = $_POST['work'];
 			settype($work, 'string');
+			if(!$this->model->deleteTask($idWork)){
+				$this->pageData['error'] = "Данного задания не найдено, взломщик :D";
+			}
 			$this->model->deleteTask($idWork);
 	}
-
+// функция добавления задания
 	public function addTask(){
-			$discript = (string)$_POST['name'];
+			$discript = htmlspecialchars((string)$_POST['name']);
 			$today = date("m.d.y");   
 			$UsrId = $_SESSION['UserId'];
 			$this->model->addTask($discript, $today, $UsrId);
 				
 	}
-
+// Функция обновления задания
 	public function editTask(){
 			$idWork = $_POST['work'];
 			settype($idWork, 'string');
+			if(!$this->model->deleteTask($idWork)){
+				$this->pageData['error'] = "Взломщик, это тебе с рук не сойдет :)";
+			}
 			$this->model->udpdateTask($idWork);	
 	}	
 
-
+// Главная функция, происходят все операций здесь
 	public function index() {
 		if(!isset($_SESSION["login"])){
 			header("Location: /");
 		}
+		else {
 		if (isset($_POST["addTask"])) {
 			if(!empty($_POST) && !empty($_POST['name'])) {
 				$this->addTask();
+				header("Refresh: 0");
 			}  else {
 			$this->pageData['TaskMsg'] = "Вы заполнили не все поля";
 			return false;
@@ -68,8 +77,9 @@ class TaskController extends Controller {
 		$this->pageData['tasks'] = $tasks;
 
 		$this->view->render($this->pageTpl, $this->pageData);
+			}
 		}
-
+// функция выхода из учетки
 	public function logout() {
 		session_destroy();
 		header("Location: /");

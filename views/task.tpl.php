@@ -1,4 +1,6 @@
-
+  <?php if(!empty($pageData['error'])) :?>
+                        <p><?php echo $pageData['error']; ?></p>
+                    <?php endif; ?>
 <form method="post">
  <p>Введите дело <input type="text" name="name" required /></p>
  <a href="/task.tpl.php"><input type="submit" name="addTask"/></a>

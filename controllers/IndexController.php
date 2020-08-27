@@ -15,16 +15,20 @@ class indexController extends Controller {
 		settype($login, 'string');
 		$password = md5($_POST['password']);
 		settype($login, 'string');
-		$this->model->checkUser($login, $password);
+		if($this->model->checkUser($login, $password)){
 		$_SESSION['login'] = $login;
 		header("Location: /task");
+	}
+		if(!$this->model->checkUser($login, $password)){
+			$this->pageData['error'] = "Данный логин занят";
+		}
 	}
 
 	public function index() {
 		$this->pageData['title'] = "Вход в личный кабинет";
 		if(!empty($_POST)) {
 			if(!$this->login()) {
-				$this->pageData['error'] = "Неправильный логин или пароль";
+				$this->pageData['error'] = "Неправильный логин или пароль	";
 			}
 		}
 		if(isset($_POST['btn_submit_auth'])){

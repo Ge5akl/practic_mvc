@@ -2,7 +2,6 @@
 
 class IndexModel extends Model {
 
-
 	public function checkUser($login, $password) {
 		$login = mysqli_real_escape_string($this->db, $login);
 		$password = mysqli_real_escape_string($this->db, $password);
@@ -16,8 +15,18 @@ class IndexModel extends Model {
 		return($res);
 	}
 	 if(empty($res)){
-		$resultReg = mysqli_query($this->db,"INSERT INTO `users` (login, password) VALUES ('".$login."','".$password."')");	
-		return($resultReg);
-		}	
-}
+
+	 	$result = mysqli_query($this->db,"SELECT login FROM `users` WHERE login = '".$login."'");
+		$num = mysqli_num_rows($result);
+
+		if($num == 0)
+    	{
+     		$resultReg = mysqli_query($this->db,"INSERT INTO `users` (login, password) VALUES ('".$login."','".$password."')");	
+			return($resultReg);
+     	}
+     	if($num > 0){
+    		 return(false);
+     	}
+		}
+	}	
 }

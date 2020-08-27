@@ -23,19 +23,38 @@ class TaskModel extends Model {
 			$today = mysqli_real_escape_string($this->db, $today);
 			$UsrId = mysqli_real_escape_string($this->db, $UsrId);
 			$result = mysqli_query($this->db, "INSERT INTO `disc` (user_id, description, created_at) VALUES ('".$UsrId."', '".$discript."', '".$today."') ");
-			header("Refresh: 0");
+			return($result);
 			//$result_query_insert = $mysqli->query("INSERT INTO `disc` (user_id, description, created_at) VALUES ('".$val1."', '".$val2."', '".$val3."') ");
 		}
 
 		public function deleteTask($idWork){
 		$idWork = mysqli_real_escape_string($this->db, $idWork);
+		$idCheck = $_SESSION['UserId'];
+		$resultCheck = mysqli_query($this->db, "SELECT *  FROM `disc` WHERE `user_id` = '".$idCheck."' AND id = '".$idWork."'");
+		$num = mysqli_num_rows($resultCheck);
+		if($num == 0)
+    	{	
+    		 return(false);
+     	}
+     	if($num > 0){
+    		 $idWork = mysqli_real_escape_string($this->db, $idWork);
 			$result = mysqli_query($this->db, "DELETE FROM `disc` WHERE `id` = '".$idWork."'");
 			return($idWork);
+     	}
 		}
 
-			public function UdpdateTask($idWork){
+		public function UdpdateTask($idWork){
 		$idWork = mysqli_real_escape_string($this->db, $idWork);
+		$idCheck = $_SESSION['UserId'];
+		$resultCheck = mysqli_query($this->db, "SELECT *  FROM `disc` WHERE `user_id` = '".$idCheck."' AND id = '".$idWork."'");
+		$num = mysqli_num_rows($resultCheck);
+		if($num == 0)
+    	{	
+    		 return(false);
+     	}
+     	if($num > 0){
 			$result = mysqli_query($this->db, "UPDATE `disc` set `status` = 'notActive' WHERE `id` = '".$idWork."'");
 			return($idWork);
+			}
 		}
 }
