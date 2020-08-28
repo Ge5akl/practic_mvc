@@ -19,6 +19,9 @@ class Routing {
             $modelName = ucfirst($route[1]. "Model");
         }
         
+        if(!file_exists(MODEL_PATH . $modelName . ".php")){
+            header("Location: /views/404.tpl.php");
+        }
         require_once CONTROLLER_PATH . $controllerName . ".php"; //IndexController.php
         require_once MODEL_PATH . $modelName . ".php"; //IndexModel.php
 
